@@ -55,4 +55,16 @@ describe 'SoundX' do
       assert_equal 'R163', SoundX.encode('rupert')
     end
   end
+
+  describe ".encode given the ascii string 'Tymczak'" do
+    it "returns the correct soundex" do
+      assert_equal 'T520', SoundX.encode('Tymczak')
+    end
+  end
+
+  describe ".encode given the ascii string 'Lukasiewicz'" do
+    it "returns the correct soundex" do
+      assert_equal 'L200', SoundX.encode('Lukasiewicz')
+    end
+  end
 end
