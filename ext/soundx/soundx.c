@@ -49,7 +49,7 @@ rb_soundx(int argc, VALUE* argv, VALUE self)
   const unsigned char* src;
   int written = 0;
   size_t srclen;
-  char *dest = malloc(4);
+  char *dest = malloc(5);
 
   if (!dest) {
     rb_raise(rb_eNoMemError, "malloc failed");
@@ -67,17 +67,27 @@ rb_soundx(int argc, VALUE* argv, VALUE self)
   dest[0] = toupper(src[0]);
 
   for(size_t i = 1; i <= srclen; i++) {
+    if (written >= 3) {
+      break;
+    }
+
     if ('\0' == src[i]) {
       break;
     }
 
     if (src[i] > 128) {
+      free(dest);
       rb_raise(rb_eArgError, "non-ASCII character found");
+      break;
     }
 
     unsigned char current = tolower(src[i]);
 
     char match = mapping[ current ];
+    if (0xFE == (int) match) {
+      continue;
+    }
+
     // Skip if previous character is the same
     if (dest[written] == match) {
       continue;
@@ -96,13 +106,15 @@ rb_soundx(int argc, VALUE* argv, VALUE self)
 
   // Pad at most three '0' characters
   // to handle really short names
-  if (written < 4) {
-    for( int i = (4-written); i > 0; i--) {
+  if (written < 3) {
+    for( int i = (3-written); i > 0; i--) {
       dest[written+i] = '0';
     }
   }
 
-  VALUE rbString = rb_str_new(dest, 4);
+  dest[4] = '\0';
+
+  VALUE rbString = rb_str_new_cstr(dest);
   free(dest);
 
   return rbString;
