@@ -20,7 +20,7 @@ r                      => 6
  Pre-computed mapping of a-z to the above
  table.
 */
-static const char mapping[128] = {
+static const unsigned char mapping[128] = {
 0xFE, 0xFE, 0xFE, 0xFE, 0xFE, 0xFE, 0xFE,
 0xFE, 0xFE, 0xFE, 0xFE, 0xFE, 0xFE, 0xFE,
 0xFE, 0xFE, 0xFE, 0xFE, 0xFE, 0xFE, 0xFE,
@@ -46,7 +46,7 @@ static VALUE
 rb_soundx(int argc, VALUE* argv, VALUE self)
 {
   VALUE input;
-  const unsigned char* src;
+  unsigned char* src;
   int written = 0;
   size_t srclen;
   char *dest = malloc(5);
@@ -62,7 +62,7 @@ rb_soundx(int argc, VALUE* argv, VALUE self)
   }
 
   srclen = RSTRING_LEN(input);
-  src = (const unsigned char*) StringValueCStr(input);
+  src = (unsigned char *) StringValueCStr(input);
 
   dest[0] = toupper(src[0]);
 
@@ -83,8 +83,8 @@ rb_soundx(int argc, VALUE* argv, VALUE self)
 
     unsigned char current = tolower(src[i]);
 
-    char match = mapping[ current ];
-    if (0xFE == (int) match) {
+    unsigned char match = mapping[ current ];
+    if (0xFE == match) {
       continue;
     }
 
