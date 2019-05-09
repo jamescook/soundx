@@ -49,11 +49,7 @@ rb_soundx(int argc, VALUE* argv, VALUE self)
   const unsigned char* src;
   int written = 0;
   size_t srclen;
-  char *dest = malloc(5);
-
-  if (!dest) {
-    rb_raise(rb_eNoMemError, "malloc failed");
-  }
+  char dest[5] = "";
 
   rb_scan_args(argc, argv, "1", &input);
 
@@ -76,7 +72,6 @@ rb_soundx(int argc, VALUE* argv, VALUE self)
     }
 
     if (src[i] > 128) {
-      free(dest);
       rb_raise(rb_eArgError, "non-ASCII character found");
       break;
     }
@@ -115,7 +110,6 @@ rb_soundx(int argc, VALUE* argv, VALUE self)
   dest[4] = '\0';
 
   VALUE rbString = rb_str_new_cstr(dest);
-  free(dest);
 
   return rbString;
 }
