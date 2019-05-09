@@ -16,20 +16,20 @@ irb: SoundX.encode('Rupert')
 
 ### Benchmark
 
-Tested on Core i7 Macbook Pro (2014). Ruby 2.5.3
+Tested on Core i7 Macbook Pro (2014). Ruby 2.6.3
 See the benchmark folder for yet another Ruby implementation.
 ```
 Calculating -------------------------------------
-My Ruby-only version    259.275k (± 5.2%) i/s -      3.899M in  15.089488s
-              SoundX      3.567M (± 4.9%) i/s -     53.464M in  15.026927s
-   Text::Soundex gem    100.191k (± 4.5%) i/s -      1.507M in  15.075963s
-         Soundex gem     75.599k (± 4.0%) i/s -      1.133M in  15.009973s
+My Ruby-only version    254.744k (± 5.1%) i/s -      3.811M in  15.003116s
+              SoundX      6.474M (± 4.7%) i/s -     97.079M in  15.032826s
+   Text::Soundex gem     91.562k (± 3.8%) i/s -      1.376M in  15.051172s
+         Soundex gem     66.860k (± 7.3%) i/s -    999.939k in  15.039989s
 
 Comparison:
-              SoundX:  3566961.2 i/s
-My Ruby-only version:   259274.6 i/s - 13.76x  slower
-   Text::Soundex gem:   100190.9 i/s - 35.60x  slower
-         Soundex gem:    75598.6 i/s - 47.18x  slower
+              SoundX:  6473685.9 i/s
+My Ruby-only version:   254743.6 i/s - 25.41x  slower
+   Text::Soundex gem:    91562.5 i/s - 70.70x  slower
+         Soundex gem:    66860.3 i/s - 96.82x  slower
 ```
 
 ### Requirements
