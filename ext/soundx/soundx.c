@@ -49,7 +49,12 @@ rb_soundx(int argc, VALUE* argv, VALUE self)
   unsigned char* src;
   int written = 0;
   size_t srclen;
-  char dest[5] = "";
+
+  /*
+   Destination is padded with up to 3 trailing zeros
+   for short names.
+  */
+  char dest[5] = {'0', '0', '0', '0', '\0'};
 
   rb_scan_args(argc, argv, "1", &input);
 
@@ -98,16 +103,6 @@ rb_soundx(int argc, VALUE* argv, VALUE self)
 
     written++;
   }
-
-  // Pad at most three '0' characters
-  // to handle really short names
-  if (written < 3) {
-    for( int i = (3-written); i > 0; i--) {
-      dest[written+i] = '0';
-    }
-  }
-
-  dest[4] = '\0';
 
   VALUE rbString = rb_str_new_cstr(dest);
 
