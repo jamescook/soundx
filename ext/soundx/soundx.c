@@ -48,7 +48,7 @@ rb_soundx(int argc, VALUE* argv, VALUE self)
   VALUE input;
   VALUE rbDestString;
   unsigned char* src;
-  int written = 0;
+  unsigned char written = 0; // Should not exceed 3, so 8 bits is plenty.
   size_t srclen;
   size_t i; // for looping the src
   unsigned char current;
