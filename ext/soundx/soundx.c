@@ -46,9 +46,13 @@ static VALUE
 rb_soundx(int argc, VALUE* argv, VALUE self)
 {
   VALUE input;
+  VALUE rbDestString;
   unsigned char* src;
   int written = 0;
   size_t srclen;
+  size_t i; // for looping the src
+  unsigned char current;
+  unsigned char match;
 
   /*
    Destination is padded with up to 3 trailing zeros
@@ -67,7 +71,7 @@ rb_soundx(int argc, VALUE* argv, VALUE self)
 
   dest[0] = toupper(src[0]);
 
-  for(size_t i = 1; i <= srclen; i++) {
+  for(i = 1; i <= srclen; i++) {
     if (written >= 3) {
       break;
     }
@@ -81,9 +85,10 @@ rb_soundx(int argc, VALUE* argv, VALUE self)
       break;
     }
 
-    unsigned char current = tolower(src[i]);
+    current = tolower(src[i]);
 
-    unsigned char match = mapping[ current ];
+    match = mapping[ current ];
+
     if (0xFE == match) {
       continue;
     }
@@ -112,9 +117,9 @@ rb_soundx(int argc, VALUE* argv, VALUE self)
     written++;
   }
 
-  VALUE rbString = rb_str_new_cstr(dest);
+  rbDestString = rb_str_new_cstr(dest);
 
-  return rbString;
+  return rbDestString;
 }
 void
 Init_soundx() {
