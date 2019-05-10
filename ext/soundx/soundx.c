@@ -88,6 +88,14 @@ rb_soundx(int argc, VALUE* argv, VALUE self)
       continue;
     }
 
+    // The 2nd character must still respect
+    // the 'double code number' rule.
+    if (1 == i) {
+      if (match == mapping[tolower(src[0])]) {
+        continue;
+      }
+    }
+
     // Skip if previous character is the same
     if (dest[written] == match) {
       continue;
