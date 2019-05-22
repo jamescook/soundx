@@ -62,9 +62,7 @@ rb_soundx(int argc, VALUE* argv, VALUE self)
 
   rb_scan_args(argc, argv, "1", &input);
 
-  if (TYPE(input) != T_STRING) {
-    rb_raise(rb_eTypeError, "expected a String");
-  }
+  Check_Type(input, T_STRING);
 
   srclen = RSTRING_LEN(input);
   src = (unsigned char *) StringValueCStr(input);
