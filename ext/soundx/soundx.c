@@ -69,12 +69,8 @@ rb_soundx(int argc, VALUE* argv, VALUE self)
 
   dest[0] = toupper(src[0]);
 
-  for(i = 1; i <= srclen; i++) {
+  for(i = 1; i < srclen; i++) {
     if (written >= 3) {
-      break;
-    }
-
-    if ('\0' == src[i]) {
       break;
     }
 
