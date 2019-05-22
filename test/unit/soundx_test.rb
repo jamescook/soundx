@@ -23,6 +23,10 @@ describe 'SoundX' do
       assert_raises ArgumentError do
         SoundX.encode 'ølga'
       end
+
+      assert_raises ArgumentError do
+        SoundX.encode 128.chr
+      end
     end
   end
 

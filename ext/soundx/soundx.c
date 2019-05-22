@@ -67,6 +67,10 @@ rb_soundx(int argc, VALUE* argv, VALUE self)
   srclen = RSTRING_LEN(input);
   src = (unsigned char *) StringValueCStr(input);
 
+  if (src[0] > 127) {
+    rb_raise(rb_eArgError, "non-ASCII character found");
+  }
+
   dest[0] = toupper(src[0]);
 
   for(i = 1; i < srclen; i++) {
@@ -74,7 +78,7 @@ rb_soundx(int argc, VALUE* argv, VALUE self)
       break;
     }
 
-    if (src[i] > 128) {
+    if (src[i] > 127) {
       rb_raise(rb_eArgError, "non-ASCII character found");
       break;
     }
