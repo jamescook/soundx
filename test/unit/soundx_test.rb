@@ -13,7 +13,7 @@ describe 'SoundX' do
   describe ".encode given a non-string" do
     it "returns a type error" do
       assert_raises TypeError do
-        SoundX.encode -1
+        SoundX.encode(-1)
       end
     end
   end
