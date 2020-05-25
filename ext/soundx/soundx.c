@@ -100,8 +100,26 @@ rb_soundx(int argc, VALUE* argv, VALUE self)
     }
 
     // Skip if previous character is the same
+    // e.g. Gutierrez (2nd 'r' ignored)
     if (src[i] == src[i-1]) {
       continue;
+    }
+
+    // If the surname has different letters side-by-side that have the same number
+    // in the soundex coding guide, they should be treated as one letter.
+    // e.g. Jackson
+    if (mapping[current] == mapping[tolower(src[i-1])] && src[i] != src[i-1]) {
+      continue;
+    }
+
+
+    // If "H" or "W" separate two consonants that have the same soundex code,
+    // the consonant to the right of the vowel is not coded.
+    if (i+1 < srclen && (current == 'h' || current == 'w')) {
+      if(dest[written] == mapping[tolower(src[i+1])]) {
+        i = i + 1; // Skip over the next consonant
+        continue;
+      }
     }
 
     // We landed on a vowel-like character,

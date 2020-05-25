@@ -30,15 +30,34 @@ describe 'SoundX' do
     end
   end
 
+
+  describe 'encoding Pfister' do
+    it 'is correct' do
+      assert_equal 'P236', SoundX.encode('Pfister')
+    end
+  end
+
+  describe 'encoding jackson' do
+    it 'is correct' do
+      assert_equal 'J250', SoundX.encode('jackson')
+    end
+  end
+
+  describe 'encoding Gutierrez' do
+    it 'is correct' do
+      assert_equal 'G362', SoundX.encode('Gutierrez')
+    end
+  end
+
   describe ".encode given the asciii string 'Ashcraft'" do
     it "returns the correct soundex" do
-      assert_equal 'A226', SoundX.encode('Ashcraft')
+      assert_equal 'A261', SoundX.encode('Ashcraft')
     end
   end
 
   describe ".encode given the asciii string 'Ashcroft'" do
     it "returns the correct soundex" do
-      assert_equal 'A226', SoundX.encode('Ashcroft')
+      assert_equal 'A261', SoundX.encode('Ashcroft')
     end
   end
 
