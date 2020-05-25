@@ -32,13 +32,13 @@ describe 'SoundX' do
 
   describe ".encode given the asciii string 'Ashcraft'" do
     it "returns the correct soundex" do
-      assert_equal 'A261', SoundX.encode('Ashcraft')
+      assert_equal 'A226', SoundX.encode('Ashcraft')
     end
   end
 
   describe ".encode given the asciii string 'Ashcroft'" do
     it "returns the correct soundex" do
-      assert_equal 'A261', SoundX.encode('Ashcroft')
+      assert_equal 'A226', SoundX.encode('Ashcroft')
     end
   end
 
@@ -62,13 +62,13 @@ describe 'SoundX' do
 
   describe ".encode given the ascii string 'Tymczak'" do
     it "returns the correct soundex" do
-      assert_equal 'T520', SoundX.encode('Tymczak')
+      assert_equal 'T522', SoundX.encode('Tymczak')
     end
   end
 
   describe ".encode given the ascii string 'Lukasiewicz'" do
     it "returns the correct soundex" do
-      assert_equal 'L200', SoundX.encode('Lukasiewicz')
+      assert_equal 'L222', SoundX.encode('Lukasiewicz')
     end
   end
 

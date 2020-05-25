@@ -100,7 +100,7 @@ rb_soundx(int argc, VALUE* argv, VALUE self)
     }
 
     // Skip if previous character is the same
-    if (dest[written] == match) {
+    if (src[i] == src[i-1]) {
       continue;
     }
 
